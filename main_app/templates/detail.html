@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+  <main>
+    <article>
+      <img> 
+      <h3>{{ piece.name }}</h3> 
+    </article> 
+    {% for post in posts %}
+      {% include '_post.html' %}
+    {% endfor %}
+  </main> 
+{% endblock %}

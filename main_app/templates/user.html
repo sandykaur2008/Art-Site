@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+  <main>
+    <table>
+      <tr>
+        <td width="16em"><img src="{{ user.img_url }}"></td>
+        <td>
+          <h1>{{ user.username }}</h1>
+          {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+          <p>Email: {{ user.email }}</p>
+        </td>
+      </tr>
+    </table>
+    {% for piece in pieces %}
+    <article>
+      <a href="{% url 'detail' piece.id %}">
+        <img> 
+        <h3>{{ piece.name }}</h3>
+      </a> 
+    </article> 
+    {% endfor %}
+  </main> 
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+  <main>
+    <h1>Sign In</h1>
+    <p>Forgot Your Password?</p>
+    <a href="{{ url 'reset_password' }}">Click to Reset Password</a>
+  </main> 
+{% endblock %}
