@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %} 
+  <main> 
+    {% for piece in pieces %}
+    <article>
+      <a href="{% url 'profile' piece.user.username %}">
+        <img> 
+        <h3>Art by {{ piece.user.username }}</h3>
+      </a> 
+    </article> 
+    {% endfor %}
+  </main>   
+{% endblock %}

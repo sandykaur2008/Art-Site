@@ -3,18 +3,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{{ title }}|ART</title>
+    <title>{{ name }}|ART</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'style.css' %}" rel="stylesheet">
   </head> 
   <body>
     <header>
       <nav>
+        <a href="{% url 'home' %}">Home</a> 
+        {% if name != 'About' %}
         <a href="{% url 'about' %}">About</a>
+        {% endif %}
+        {% if name != 'Contact' %}
         <a href="{% url 'contact' %}">Contact</a>
+        {% endif %}
+        {% if name != 'Login' %}
         <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+        {% if name != 'Logout' %}
+        <a href="{% url 'logout' %}">Logout</a> 
+        {% endif %}
+        {% if name != 'Profile' %}
+        <a href="{% url 'profile' %}">Profile</a> 
+        {% endif %}
+        {% if name != 'Register' %}
         <a href="{% url 'register' %}">Register</a>
+        {% endif %}
       </nav>
     </header> 
+    {% block content %} {% endblock %}
   </body> 
 </html> 
