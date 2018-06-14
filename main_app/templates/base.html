@@ -12,23 +12,23 @@
   <body>
     <header>
       <nav>
-        <a href="{% url 'home' %}">Home</a> 
-        {% if name != 'About' %}
+        <a href="{% url 'index' %}">Home</a> 
+        {% if name != 'about' %}
         <a href="{% url 'about' %}">About</a>
         {% endif %}
-        {% if name != 'Contact' %}
+        {% if name != 'contact' %}
         <a href="{% url 'contact' %}">Contact</a>
         {% endif %}
-        {% if name != 'Login' %}
+        {% if name != 'login' %}
         <a href="{% url 'login' %}">Login</a>
         {% endif %}
-        {% if name != 'Logout' %}
+        {% if name != 'logout' %}
         <a href="{% url 'logout' %}">Logout</a> 
         {% endif %}
-        {% if name != 'Profile' %}
-        <a href="{% url 'profile' %}">Profile</a> 
+        {% if name != 'profile' %}
+        <a href="{% url 'user' user.username %}">Profile</a> 
         {% endif %}
-        {% if name != 'Register' %}
+        {% if name != 'register' %}
         <a href="{% url 'register' %}">Register</a>
         {% endif %}
       </nav>
