@@ -23,7 +23,7 @@ def about(request):
   return render(request, 'about.html')
 
 def detail(request, piece_id):
-  piece = Piece.objects.get(id=piece_id)
+  piece = Piece.objects.get(pk=piece_id)
   return render(request, 'detail.html', {'piece': piece})
 
 def edit_profile(request):
