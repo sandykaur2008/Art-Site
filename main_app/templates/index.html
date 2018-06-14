@@ -3,11 +3,11 @@
 
 {% block content %} 
   <main> 
-    {% for piece in pieces %}
+    {% for user in users %}
     <article>
       <a href="{% url 'profile' piece.user.username %}">
         <img> 
-        <h3>Art by {{ piece.user.username }}</h3>
+        <h3>Art by {{ user.username }}</h3>
       </a> 
     </article> 
     {% endfor %}
