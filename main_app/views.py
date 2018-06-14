@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from .models import Piece 
+from .models import Piece, Profile
 from django.contrib.auth import authenticate, login, logout
 # pylint: disable=E1101
 # Create your views here.
@@ -12,9 +12,11 @@ def index(request):
 def profile(request, username):
   user = User.objects.get(username=username)
   pieces = Piece.objects.filter(user=user)
+  profile = Profile.objects.get(user=user)
   return render(request, 'profile.html',
                 {'username': username,
-                'pieces': pieces})
+                'pieces': pieces,
+                'profile': profile})
 
 def contact(request):
   return render(request, 'contact.html')

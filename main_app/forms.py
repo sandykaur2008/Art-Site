@@ -25,9 +25,9 @@ class EditProfileForm(forms.ModelForm):
     fields = ['bio', 'img_url']
 
 class SignUpForm(UserCreationForm):
-  first_name = forms.CharField(max_length=30)
-  last_name = forms.CharField(max_length=30)
-  email = forms.EmailField(max_length=50)
+  first_name = forms.CharField(label='First Name', max_length=30)
+  last_name = forms.CharField(label='Last Name', max_length=30)
+  email = forms.EmailField(label='Email', max_length=50)
 
   class Meta:
     model = User
