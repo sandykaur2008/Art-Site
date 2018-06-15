@@ -1,5 +1,5 @@
 from django import forms 
-from .models import Piece, Profile
+from .models import Piece, Profile, Post
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -33,3 +33,11 @@ class SignUpForm(UserCreationForm):
     model = User
     fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
   
+class LoginForm(forms.Form):
+  username = forms.CharField(label='Username', max_length=64)
+  password = forms.CharField(widget=forms.PasswordInput())
+
+class PostForm(forms.Form):
+  class Meta:
+    model = Post
+    fields = ['body']
