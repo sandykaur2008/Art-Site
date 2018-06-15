@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+  <main>
+    <h1>Sign In</h1>
+    <form method='post' action'.'>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type='submit' value='Submit'/>
+    </form>
+    <p>Forgot Your Password?</p>
+    <a href="#">Click to Reset Password</a>
+  </main> 
+{% endblock %}
+
+
+
