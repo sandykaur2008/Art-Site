@@ -13,6 +13,13 @@ class Piece(models.Model):
   def __str__(self):
     return self.name
 
+class Post(models.Model):
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+  body = models.TextField(max_length=200)
+
+  def __str__(self):
+    return self.body 
+
 class Profile(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE)
   bio = models.TextField(max_length=500, blank=True)
