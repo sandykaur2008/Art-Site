@@ -1,0 +1,38 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ name }}|ART</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+  </head> 
+  <body>
+    <header>
+      <nav>
+        <a href="{% url 'index' %}">Home</a> 
+        {% if name != 'about' %}
+        <a href="{% url 'about' %}">About</a>
+        {% endif %}
+        {% if name != 'contact' %}
+        <a href="{% url 'contact' %}">Contact</a>
+        {% endif %}
+        {% if name != 'login' %}
+        <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+        {% if name != 'logout' %}
+        <a href="{% url 'logout' %}">Logout</a> 
+        {% endif %}
+        {% if name != 'profile' %}
+        <a href="{% url 'user' user.username %}">Profile</a> 
+        {% endif %}
+        {% if name != 'register' %}
+        <a href="{% url 'register' %}">Register</a>
+        {% endif %}
+      </nav>
+    </header> 
+    {% block content %} {% endblock %}
+  </body> 
+</html> 
