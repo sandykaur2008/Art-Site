@@ -7,5 +7,10 @@
     <p>Have questions or comments about this site? Enter them below!
         If you wish to reach a specific artist featured on this site,
         please visit their profile page to contact them directly.</p>
+    <form method='post' action'.'>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type='submit' value='Submit'/>
+    </form>
   </main>
 {% endblock %}

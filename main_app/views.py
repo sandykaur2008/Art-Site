@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from .models import Piece, Profile
-from .forms import LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm, ContactForm
 from django.contrib.auth import authenticate, login, logout
 # pylint: disable=E1101
 # Create your views here.
@@ -48,20 +49,26 @@ def index(request):
   users = User.objects.all()
   return render(request, 'index.html', {'users': users})
 
-# def profile(request, username):
-#   user = User.objects.get(username=username)
-#   pieces = Piece.objects.filter(user=user)
-#   profile = Profile.objects.get(user=user)
-#   return render(request, 'profile.html',
-#                 {'username': username,
-#                 'pieces': pieces,
-#                 'profile': profile})
+def about(request):
+  return render(request, 'about.html')
 
-# def contact(request):
-#   return render(request, 'contact.html')
+def contact(request):
+  if request.method == 'POST':
+    form = ContactForm(request.POST)
+    if form.is_valid():
+      return HttpResponseRedirect('/')
+  else:
+    form = ContactForm()
+  return render(request, 'contact.html', {'form': form})
 
-# def about(request):
-#   return render(request, 'about.html')
+def profile(request, username):
+  user = User.objects.get(username=username)
+  pieces = Piece.objects.filter(user=user)
+  profile = Profile.objects.get(user=user)
+  return render(request, 'profile.html',
+                {'user': user,
+                'pieces': pieces,
+                'profile': profile})
 
 # def detail(request, piece_id):
 #   piece = Piece.objects.get(pk=piece_id)
