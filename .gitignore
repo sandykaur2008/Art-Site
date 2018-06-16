@@ -5,3 +5,4 @@ main_app/__pycache__/
 artsite/settings_secret.py
 db.sqlite3
 main_app/migrations/__pycache__
+.env
