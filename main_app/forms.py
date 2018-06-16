@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class PieceForm(forms.ModelForm):
   class Meta:
     model = Piece
-    fields = ['name', 'img_url']
+    fields = ['name', 'image']
 
 class ContactForm(forms.Form):
   text = forms.CharField(widget=forms.Textarea, label='Questions/Comments', max_length=500)
@@ -22,7 +22,7 @@ class UserForm(forms.ModelForm):
 class EditProfileForm(forms.ModelForm):
   class Meta:
     model = Profile
-    fields = ['bio', 'img_url']
+    fields = ['bio', 'image']
 
 class RegisterForm(UserCreationForm):
   first_name = forms.CharField(label='First Name', max_length=30)

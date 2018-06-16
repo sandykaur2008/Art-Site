@@ -8,7 +8,7 @@
         <td width="16em"></td>
         <td>
           <h1>{{ user.username }}</h1>
-          {% if profile.user.bio %}<p>{{ profile.user.bio }}</p>{% endif %}
+          {% if user.profile.bio %}<p>{{ user.profile.bio }}</p>{% endif %}
           <p>Email: {{ user.email }}</p>
         </td>
       </tr>
@@ -21,5 +21,11 @@
       </a> 
     </article> 
     {% endfor %}
+    <p>Want to add a piece? Do so below!</p>
+    <form enctype='multipart/form-data' action='post_url/' method='post'>
+      {% csrf_token %}
+      {{ form }}
+      <input type='submit' value='Submit'/>
+    </form>
   </main> 
 {% endblock %}

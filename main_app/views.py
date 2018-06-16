@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import Piece, Profile
-from .forms import LoginForm, RegisterForm, ContactForm, UserForm, EditProfileForm
+from .forms import LoginForm, RegisterForm, ContactForm, UserForm, EditProfileForm, PieceForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.db import transaction 
@@ -69,20 +69,21 @@ def profile(request, username):
   user = User.objects.get(username=username)
   pieces = Piece.objects.filter(user=user)
   profile = Profile.objects.get(user=user)
+  form = PieceForm()
   return render(request, 'profile.html',
                 {'user': user,
                 'pieces': pieces,
-                'profile': profile})
+                'profile': profile, 'form': form})
 
 @login_required
 @transaction.atomic 
 def edit_profile(request):
   if request.method == 'POST':
     user_form = UserForm(request.POST, instance=request.user)
-    profile_form = EditProfileForm(request.POST, instance=request.user.profile)
+    profile_form = EditProfileForm(request.POST, request.FILES, instance=request.user.profile)
     if user_form.is_valid() and profile_form.is_valid():
       user_form.save()
-      profile_form.save()
+      profile_form.save(commit = True)
       messages.success(request, 'Your profile was successfully updated!')
       return HttpResponseRedirect('/edit_profile')
     else:
@@ -94,6 +95,12 @@ def edit_profile(request):
     'user_form': user_form,
     'profile_form': profile_form
   })
+
+def post_piece(request):
+  form = PieceForm(request.POST, request.FILES)
+  if form.is_valid():
+    form.save(commit = True)
+  return HttpResponseRedirect('/')
 
 # def detail(request, piece_id):
 #   piece = Piece.objects.get(pk=piece_id)
