@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import Piece, Profile
-from .forms import LoginForm, RegisterForm, ContactForm
+from .forms import LoginForm, RegisterForm, ContactForm, UserForm, EditProfileForm
 from django.contrib.auth import authenticate, login, logout
 # pylint: disable=E1101
 # Create your views here.
@@ -70,12 +70,15 @@ def profile(request, username):
                 'pieces': pieces,
                 'profile': profile})
 
+@login_required
+def edit_profile(request):
+  if request.method == 'POST':
+    user_form = UserForm(request.POST, instance=request.user)
+  return render(request, 'edit_profile.html')
+
 # def detail(request, piece_id):
 #   piece = Piece.objects.get(pk=piece_id)
 #   return render(request, 'detail.html', {'piece': piece})
-
-# def edit_profile(request):
-#   return render(request, 'edit_profile.html')
 
 # def reset_password(request):
 #   return render(request, 'reset_password.html')

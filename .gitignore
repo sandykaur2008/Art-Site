@@ -2,6 +2,6 @@ artsite/__pycache__
 venv
 artsite.code-workspace
 main_app/__pycache__/
-main_app/migrations/
 artsite/settings_secret.py
 db.sqlite3
+main_app/migrations/__pycache__
