@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from .models import Piece, Profile
 from .forms import LoginForm, RegisterForm, ContactForm, UserForm, EditProfileForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.db import transaction 
 # pylint: disable=E1101
 # Create your views here.
 
@@ -20,9 +22,11 @@ def login_view(request):
           login(request, user)
           return HttpResponseRedirect('/')
         else:
-          print('The account has been disabled')
+          messages.error(request, 'The account has been disabled')
+          return HttpResponseRedirect('/login')
       else:
-        print('The username and password were incorrect.')
+        messages.error(request, 'The username and password were incorrect')
+        return HttpResponseRedirect('/login')
   else:
     form = LoginForm()
     return render(request, 'login.html', {'form': form})
@@ -71,10 +75,25 @@ def profile(request, username):
                 'profile': profile})
 
 @login_required
+@transaction.atomic 
 def edit_profile(request):
   if request.method == 'POST':
     user_form = UserForm(request.POST, instance=request.user)
-  return render(request, 'edit_profile.html')
+    profile_form = EditProfileForm(request.POST, instance=request.user.profile)
+    if user_form.is_valid() and profile_form.is_valid():
+      user_form.save()
+      profile_form.save()
+      messages.success(request, 'Your profile was successfully updated!')
+      return HttpResponseRedirect('/edit_profile')
+    else:
+      messages.error(request, 'Please make sure you entered changes correctly')
+  else:
+    user_form = UserForm(instance=request.user)
+    profile_form = EditProfileForm(instance=request.user.profile)
+  return render(request, 'edit_profile.html', {
+    'user_form': user_form,
+    'profile_form': profile_form
+  })
 
 # def detail(request, piece_id):
 #   piece = Piece.objects.get(pk=piece_id)

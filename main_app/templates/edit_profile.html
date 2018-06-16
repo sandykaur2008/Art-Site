@@ -4,5 +4,16 @@
 {% block content %}
   <main>
     <h1>Edit Profile</h1>
+    {% if messages %}
+      {% for message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+    <form method="post">
+      {% csrf_token %}
+      {{ user_form.as_p }}
+      {{ profile_form.as_p }}
+      <button type="submit">Save changes</button>
+    </form>
   </main>
 {% endblock %}
