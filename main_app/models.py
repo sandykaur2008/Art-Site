@@ -9,7 +9,7 @@ class Piece(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   name = models.CharField(max_length=100)
   image = models.ImageField(upload_to='piece_images',
-                            default='media/default.png')
+                            default='default.png')
 
   def __str__(self):
     return self.name
@@ -25,7 +25,7 @@ class Profile(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE)
   bio = models.TextField(max_length=500, blank=True)
   image = models.ImageField(upload_to='profile_images',
-                            default='media/default.png')
+                            default='default.png')
   
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
