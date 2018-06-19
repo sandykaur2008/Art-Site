@@ -7,6 +7,7 @@ from .forms import LoginForm, RegisterForm, ContactForm, UserForm, EditProfileFo
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.db import transaction 
+from django.core.mail import send_mail 
 # pylint: disable=E1101
 # Create your views here.
 
@@ -60,6 +61,12 @@ def contact(request):
   if request.method == 'POST':
     form = ContactForm(request.POST)
     if form.is_valid():
+      send_mail('Feedback from ArtSite', """
+      From: {} <{}>
+      {}
+      """.format(form.cleaned_data.get('name'), form.cleaned_data.get('email'), form.cleaned_data.get('text')),
+      'test69523.2@gmail.com', ['sandykaur2008@gmail.com'])
+      messages.success(request, 'Thank you for your feedback!')
       return HttpResponseRedirect('/')
   else:
     form = ContactForm()
