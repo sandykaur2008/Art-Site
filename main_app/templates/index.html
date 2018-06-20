@@ -10,8 +10,8 @@
     {% endif %}
     {% for user in users %}
     <article>
-      <a href='#'>
-        <h3>Art by</h3>
+      <a href="{% url 'profile' user.username %}">
+        <h3>Art by {{ user.username }}</h3>
       </a> 
     </article> 
     {% endfor %}

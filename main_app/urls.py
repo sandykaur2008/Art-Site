@@ -24,5 +24,4 @@ if settings.DEBUG:
     
 
     # re_path(r'^([0-9]+)/$', views.detail, name = 'detail'),
-    # path('reset_password/', views.reset_password, name = 'reset_password'),
-    # path('reset_password_request/', views.reset_password_request, name = 'reset_password request'),
+   

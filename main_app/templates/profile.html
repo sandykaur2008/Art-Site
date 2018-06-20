@@ -13,7 +13,9 @@
         </td>
       </tr>
     </table>
+    {% if request.user.is_authenticated and user == request.user %}
     <a href="{% url 'edit_profile' %}">Edit Profile</a>
+    {% endif %}
     {% for piece in pieces %}
     <article>
       <a href="#">
@@ -21,11 +23,13 @@
       </a> 
     </article> 
     {% endfor %}
+    {% if request.user.is_authenticated and user == request.user %}
     <p>Want to add a piece? Do so below!</p>
     <form enctype='multipart/form-data' action='post_url/' method='post'>
       {% csrf_token %}
-      {{ form }}
+      {{ form.as_p }}
       <input type='submit' value='Submit'/>
     </form>
+    {% endif %}
   </main> 
 {% endblock %}
