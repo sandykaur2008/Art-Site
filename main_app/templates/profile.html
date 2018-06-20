@@ -5,7 +5,7 @@
   <main>
     <table>
       <tr>
-        <td width="16em"></td>
+        <td><img src="{{ user.profile.image.url }}"></td>
         <td>
           <h1>{{ user.username }}</h1>
           {% if user.profile.bio %}<p>{{ user.profile.bio }}</p>{% endif %}
@@ -18,14 +18,15 @@
     {% endif %}
     {% for piece in pieces %}
     <article>
-      <a href="#">
+      <a href="{% url 'detail' piece.id %}">
+        <img src="{{ piece.image.url }}">
         <h3>piece</h3>
       </a> 
     </article> 
     {% endfor %}
     {% if request.user.is_authenticated and user == request.user %}
     <p>Want to add a piece? Do so below!</p>
-    <form enctype='multipart/form-data' action='post_url/' method='post'>
+    <form enctype='multipart/form-data' action="{% url 'post_piece' %}" method='post'>
       {% csrf_token %}
       {{ form.as_p }}
       <input type='submit' value='Submit'/>

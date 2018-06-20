@@ -4,11 +4,8 @@
 {% block content %}
   <main>
     <article>
-      <img> 
+      <img src="{{ piece.image.url }}"> 
       <h3>{{ piece.name }}</h3> 
     </article> 
-    {% for post in posts %}
-      {% include '_post.html' %}
-    {% endfor %}
   </main> 
 {% endblock %}
