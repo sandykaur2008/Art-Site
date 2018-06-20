@@ -6,3 +6,5 @@ artsite/settings_secret.py
 db.sqlite3
 main_app/migrations/__pycache__
 .env
+node_modules/
+media/

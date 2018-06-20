@@ -20,9 +20,10 @@ class UserForm(forms.ModelForm):
     fields = ['first_name', 'last_name', 'email']
 
 class EditProfileForm(forms.ModelForm):
+  image = forms.ImageField(label='Image', required=False, widget=forms.FileInput)
   class Meta:
     model = Profile
-    fields = ['bio', 'image']
+    fields = ['image', 'bio']
 
 class RegisterForm(UserCreationForm):
   first_name = forms.CharField(label='First Name', max_length=30)

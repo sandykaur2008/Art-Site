@@ -103,6 +103,7 @@ def edit_profile(request):
     'profile_form': profile_form
   })
 
+@login_required
 def post_piece(request):
   form = PieceForm(request.POST, request.FILES)
   if form.is_valid():
@@ -113,9 +114,4 @@ def post_piece(request):
 #   piece = Piece.objects.get(pk=piece_id)
 #   return render(request, 'detail.html', {'piece': piece})
 
-# def reset_password(request):
-#   return render(request, 'reset_password.html')
-
-# def reset_password_request(request):
-#   return render(request, 'reset_password_request.html')
 
