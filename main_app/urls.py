@@ -13,6 +13,7 @@ urlpatterns = [
     re_path(r'^user/(\w+)/$', views.profile, name = 'profile'),
     path('edit_profile/', views.edit_profile, name = 'edit_profile'),
     path('post_piece/', views.post_piece, name='post_piece'),
+    re_path(r'^([0-9]+)/$', views.detail, name = 'detail'),
 ]
     
 
@@ -23,5 +24,5 @@ if settings.DEBUG:
   ]
     
 
-    # re_path(r'^([0-9]+)/$', views.detail, name = 'detail'),
+
    

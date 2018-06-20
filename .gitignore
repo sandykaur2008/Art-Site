@@ -8,3 +8,4 @@ main_app/migrations/__pycache__
 .env
 node_modules/
 media/
+main_app/static

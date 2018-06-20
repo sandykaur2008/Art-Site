@@ -52,7 +52,8 @@ def register(request):
 
 def index(request):
   users = User.objects.all()
-  return render(request, 'index.html', {'users': users})
+  profiles = Profile.objects.all()
+  return render(request, 'index.html', {'users': users, 'profiles': profiles})
 
 def about(request):
   return render(request, 'about.html')
@@ -107,11 +108,14 @@ def edit_profile(request):
 def post_piece(request):
   form = PieceForm(request.POST, request.FILES)
   if form.is_valid():
-    form.save(commit = True)
+    piece = form.save(commit = False)
+    piece.user=request.user
+    piece.save()
+    messages.success(request, 'Your piece has been posted!')
   return HttpResponseRedirect('/')
 
-# def detail(request, piece_id):
-#   piece = Piece.objects.get(pk=piece_id)
-#   return render(request, 'detail.html', {'piece': piece})
+def detail(request, piece_id):
+  piece = Piece.objects.get(pk=piece_id)
+  return render(request, 'detail.html', {'piece': piece})
 
 
