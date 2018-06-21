@@ -14,6 +14,7 @@ urlpatterns = [
     path('edit_profile/', views.edit_profile, name = 'edit_profile'),
     path('post_piece/', views.post_piece, name='post_piece'),
     re_path(r'^([0-9]+)/$', views.detail, name = 'detail'),
+    path('post/', views.post, name='post'),
 ]
     
 

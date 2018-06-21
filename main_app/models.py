@@ -16,7 +16,9 @@ class Piece(models.Model):
 
 class Post(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
+  piece = models.ForeignKey(Piece, on_delete=models.CASCADE)
   body = models.TextField(max_length=200)
+
 
   def __str__(self):
     return self.body 

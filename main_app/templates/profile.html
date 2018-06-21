@@ -20,7 +20,7 @@
     <article>
       <a href="{% url 'detail' piece.id %}">
         <img src="{{ piece.image.url }}">
-        <h3>piece</h3>
+        <h3>{{ piece.name }}</h3>
       </a> 
     </article> 
     {% endfor %}
