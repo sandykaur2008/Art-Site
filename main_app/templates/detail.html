@@ -7,5 +7,20 @@
       <img src="{{ piece.image.url }}"> 
       <h3>{{ piece.name }}</h3> 
     </article> 
+    {% if request.user.is_authenticated %}
+    <p>Feel free to leave a comment!</p>
+    <form action="{% url 'post' %}" method='post'>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type='submit' value='Submit'/>
+    </form>
+    {% endif %}
+    {% for post in posts %}
+    <a href="{% url 'profile' post.user.username %}">
+      <p>{{ post.user.username }}</p>
+      <img src="{{ post.user.profile.image.url }}">
+    </a>
+      <p>{{ post.body }}</p>
+    {% endfor %}
   </main> 
 {% endblock %}

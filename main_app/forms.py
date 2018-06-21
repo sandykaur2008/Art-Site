@@ -38,7 +38,8 @@ class LoginForm(forms.Form):
   username = forms.CharField(label='Username', max_length=64)
   password = forms.CharField(widget=forms.PasswordInput())
 
-class PostForm(forms.Form):
+class PostForm(forms.ModelForm):
+  body = forms.CharField(widget=forms.Textarea, label='Post Here')
   class Meta:
     model = Post
     fields = ['body']

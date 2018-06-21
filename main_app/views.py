@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .models import Piece, Profile
-from .forms import LoginForm, RegisterForm, ContactForm, UserForm, EditProfileForm, PieceForm
+from .models import Piece, Profile, Post
+from .forms import LoginForm, RegisterForm, ContactForm, UserForm, EditProfileForm, PieceForm, PostForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.db import transaction 
@@ -116,6 +116,16 @@ def post_piece(request):
 
 def detail(request, piece_id):
   piece = Piece.objects.get(pk=piece_id)
-  return render(request, 'detail.html', {'piece': piece})
+  posts = Post.objects.filter(piece_id=piece_id)
+  form = PostForm()
+  return render(request, 'detail.html', {'piece': piece, 'posts': posts, 'form': form})
 
+@login_required
+def post(request):
+  form = PostForm(request.POST)
+  if form.is_valid():
+    post = form.save(commit = False)
+    post.user=request.user
+    post.save()
+  return HttpResponseRedirect('/')
 
