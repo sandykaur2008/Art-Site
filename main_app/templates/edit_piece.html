@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<main>
+  <h1>Edit Piece</h1>
+  <article>
+    <img src="{{ piece.image.url }}"> 
+    <h3>{{ piece.name }}</h3> 
+  </article> 
+  <form enctype='multipart/form-data' method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save changes</button>
+  </form>
+</main>
+{% endblock %}
