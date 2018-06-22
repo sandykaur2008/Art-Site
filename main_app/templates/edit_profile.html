@@ -4,11 +4,7 @@
 {% block content %}
   <main>
     <h1>Edit Profile</h1>
-    {% if messages %}
-      {% for message in messages %}
-        <p>{{ message }}</p>
-      {% endfor %}
-    {% endif %}
+    <img src="{{ profile.image.url }}">
     <form enctype='multipart/form-data' method="post">
       {% csrf_token %}
       {{ profile_form.as_p }}

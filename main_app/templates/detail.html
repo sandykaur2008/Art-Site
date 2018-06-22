@@ -7,11 +7,16 @@
       <img src="{{ piece.image.url }}"> 
       <h3>{{ piece.name }}</h3> 
     </article> 
+    {% if request.user.is_authenticated and piece.user == request.user  %}
+    <a href="{% url 'edit_piece' piece.id %}">
+      <p>Click here to edit this piece!</p>
+    </a>
+    {% endif %}
     {% if request.user.is_authenticated %}
     <p>Feel free to leave a comment!</p>
-    <form action="{% url 'post' %}" method='post'>
+    <form action="{% url 'post' piece.id %}" method='post'>
       {% csrf_token %}
-      {{ form.as_p }}
+      {{ post_form.as_p }}
       <input type='submit' value='Submit'/>
     </form>
     {% endif %}
