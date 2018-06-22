@@ -8,6 +8,13 @@ class PieceForm(forms.ModelForm):
     model = Piece
     fields = ['name', 'image']
 
+class EditPieceForm(forms.ModelForm):
+  image = forms.ImageField(label='Image', required=False, widget=forms.FileInput)
+  delete_piece = forms.BooleanField(label='Delete', required=False)
+  class Meta:
+    model = Piece
+    fields = ['name', 'image', 'delete_piece']
+
 class ContactForm(forms.Form):
   text = forms.CharField(widget=forms.Textarea, label='Questions/Comments', max_length=500)
   email = forms.EmailField(label='Email', max_length=50)

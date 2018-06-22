@@ -10,6 +10,7 @@ class Piece(models.Model):
   name = models.CharField(max_length=100)
   image = models.ImageField(upload_to='piece_images',
                             default='default.png')
+  delete_piece = models.BooleanField(default=False)
 
   def __str__(self):
     return self.name

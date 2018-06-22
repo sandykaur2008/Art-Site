@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import Piece, Profile, Post
-from .forms import LoginForm, RegisterForm, ContactForm, UserForm, EditProfileForm, PieceForm, PostForm
+from .forms import LoginForm, RegisterForm, ContactForm, UserForm, EditProfileForm, PieceForm, PostForm, EditPieceForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.db import transaction 
@@ -86,6 +86,8 @@ def profile(request, username):
 @login_required
 @transaction.atomic 
 def edit_profile(request):
+  user = request.user
+  profile = Profile.objects.get(user=user)
   if request.method == 'POST':
     user_form = UserForm(request.POST, instance=request.user)
     profile_form = EditProfileForm(request.POST, request.FILES, instance=request.user.profile)
@@ -101,7 +103,8 @@ def edit_profile(request):
     profile_form = EditProfileForm(instance=request.user.profile)
   return render(request, 'edit_profile.html', {
     'user_form': user_form,
-    'profile_form': profile_form
+    'profile_form': profile_form,
+    'user': user, 'profile': profile
   })
 
 @login_required
@@ -112,20 +115,45 @@ def post_piece(request):
     piece.user=request.user
     piece.save()
     messages.success(request, 'Your piece has been posted!')
-  return HttpResponseRedirect('/')
+  return HttpResponseRedirect('/user/{}'.format(request.user.username))
 
 def detail(request, piece_id):
   piece = Piece.objects.get(pk=piece_id)
   posts = Post.objects.filter(piece_id=piece_id)
-  form = PostForm()
-  return render(request, 'detail.html', {'piece': piece, 'posts': posts, 'form': form})
+  post_form = PostForm()
+  return render(request, 'detail.html', {'piece': piece, 'posts': posts, 'post_form': post_form})
 
 @login_required
-def post(request):
+def post(request, piece_id):
   form = PostForm(request.POST)
+  piece = Piece.objects.get(pk=piece_id)
   if form.is_valid():
     post = form.save(commit = False)
     post.user=request.user
+    post.piece_id=piece.id
     post.save()
-  return HttpResponseRedirect('/')
+  return HttpResponseRedirect('/{}'.format(post.piece_id))
 
+@login_required
+@transaction.atomic 
+def edit_piece(request, piece_id):
+  piece = Piece.objects.get(pk=piece_id)
+  if request.method == 'POST':
+    form = EditPieceForm(request.POST, request.FILES, instance=piece)
+    if form.is_valid():
+      delete_piece = form.cleaned_data['delete_piece']
+      if delete_piece:
+        piece.delete()
+        messages.success(request, 'Your piece was successfully deleted')
+        return HttpResponseRedirect('/user/{}'.format(request.user.username))
+      else:
+        piece_updated = form.save(commit = False)
+        piece_updated.user=request.user
+        piece_updated.save()
+        messages.success(request, 'Your piece was successfully updated!')
+        return HttpResponseRedirect('/{}'.format(piece.id))
+    else:
+      messages.error(request, 'Please make sure you entered changes correctly')
+  else:
+    form = EditPieceForm(instance=piece)
+  return render(request, 'edit_piece.html', {'form': form, 'piece': piece})
