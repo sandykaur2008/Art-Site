@@ -17,7 +17,7 @@ urlpatterns = [
     re_path(r'^post/([0-9]+)/$', views.post, name='post'),
     re_path(r'^edit_piece/([0-9]+)/$', views.edit_piece, name='edit_piece')
 ]
-    
+
 
 if settings.DEBUG:
   urlpatterns += [

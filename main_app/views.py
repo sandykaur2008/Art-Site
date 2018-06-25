@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.db import transaction 
 from django.core.mail import send_mail 
+from django.urls import reverse 
 # pylint: disable=E1101
 # Create your views here.
 
@@ -21,20 +22,20 @@ def login_view(request):
       if user is not None:
         if user.is_active:
           login(request, user)
-          return HttpResponseRedirect('/')
+          return HttpResponseRedirect(reverse('index'))
         else:
           messages.error(request, 'The account has been disabled')
-          return HttpResponseRedirect('/login')
+          return HttpResponseRedirect(reverse('login'))
       else:
         messages.error(request, 'The username and password were incorrect')
-        return HttpResponseRedirect('/login')
+        return HttpResponseRedirect(reverse('login'))
   else:
     form = LoginForm()
     return render(request, 'login.html', {'form': form})
 
 def logout_view(request):
   logout(request)
-  return HttpResponseRedirect('/')
+  return HttpResponseRedirect(reverse('index'))
 
 def register(request):
   if request.method == 'POST':
@@ -45,7 +46,7 @@ def register(request):
       raw_password = form.cleaned_data.get('password1')
       user = authenticate(username=username, password=raw_password)
       login(request, user)
-      return HttpResponseRedirect('/')
+      return HttpResponseRedirect(reverse('index'))
   else:
     form = RegisterForm()
   return render(request, 'register.html', {'form': form})
@@ -68,7 +69,7 @@ def contact(request):
       """.format(form.cleaned_data.get('name'), form.cleaned_data.get('email'), form.cleaned_data.get('text')),
       'test69523.2@gmail.com', ['sandykaur2008@gmail.com'])
       messages.success(request, 'Thank you for your feedback!')
-      return HttpResponseRedirect('/')
+      return HttpResponseRedirect(reverse('index'))
   else:
     form = ContactForm()
   return render(request, 'contact.html', {'form': form})
@@ -95,7 +96,7 @@ def edit_profile(request):
       user_form.save()
       profile_form.save(commit = True)
       messages.success(request, 'Your profile was successfully updated!')
-      return HttpResponseRedirect('/edit_profile')
+      return HttpResponseRedirect(reverse('edit_profile'))
     else:
       messages.error(request, 'Please make sure you entered changes correctly')
   else:
