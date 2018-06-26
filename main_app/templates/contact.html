@@ -3,14 +3,26 @@
 
 {% block content %}
   <main>
-    <h1>Contact</h1>
-    <p>Have questions or comments about this site? Enter them below!
-        If you wish to reach a specific artist featured on this site,
-        please visit their profile page to contact them directly.</p>
-    <form method='post' action'.'>
-      {% csrf_token %}
-      {{ form.as_p }}
-      <input type='submit' value='Submit'/>
-    </form>
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Contact</h1>
+      </div>
+    </div> 
+    <div class="row">
+      <div class="col-md-12">
+        <p>Have questions or comments about this site? Enter them below!
+          If you wish to reach a specific artist featured on this site,
+          please visit their profile page to contact them directly.</p>
+      </div>
+    </div> 
+    <div class="row">
+      <div class="col-md-12">
+        <form method='post' action'.'>
+          {% csrf_token %}
+          {{ form.as_p }}
+          <input type='submit' value='Submit'/>
+        </form>
+      </div>
+    </div> 
   </main>
 {% endblock %}

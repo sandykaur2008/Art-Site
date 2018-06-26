@@ -18,7 +18,6 @@ urlpatterns = [
     re_path(r'^edit_piece/([0-9]+)/$', views.edit_piece, name='edit_piece')
 ]
 
-
 if settings.DEBUG:
   urlpatterns += [
     re_path(r'^media/(?P<path>.*)$', serve,
