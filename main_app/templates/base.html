@@ -6,11 +6,12 @@
     <title>{{ name }}|ART</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'main.css' %}">
   </head> 
   <body>
-    <header>
-      <nav>
+    <header class="navbar navbar-default navbar-fixed-top">    
+      <div class="container">  
         <a href="{% url 'index' %}">Home</a> 
         <a href="{% url 'about' %}">About</a>
         <a href="{% url 'contact' %}">Contact</a>
@@ -21,13 +22,19 @@
         <a href="{% url 'login' %}">Login</a>
         <a href="{% url 'register' %}">Register</a>
         {% endif %}
-      </nav>
+      </div> 
     </header> 
-      {% if messages %}
-        {% for message in messages %}
-          <p>{{ message }}</p>
-        {% endfor %}
-      {% endif %}
-    {% block content %} {% endblock %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          {% if messages %}
+            {% for message in messages %}
+              <p>{{ message }}</p>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div> 
+      {% block content %} {% endblock %}
+    </div> 
   </body> 
 </html> 

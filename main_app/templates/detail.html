@@ -3,29 +3,53 @@
 
 {% block content %}
   <main>
-    <article>
-      <img src="{{ piece.image.url }}"> 
-      <h3>{{ piece.name }}</h3> 
-    </article> 
+    <div class="row">
+      <div class="col-md-12">
+        <article>
+          <img src="{{ piece.image.url }}"> 
+          <h3>{{ piece.name }}</h3> 
+        </article>
+      </div>
+    </div>  
     {% if request.user.is_authenticated and piece.user == request.user  %}
-    <a href="{% url 'edit_piece' piece.id %}">
-      <p>Click here to edit this piece!</p>
-    </a>
-    {% endif %}
+      <div class="row">
+        <div class="col-md-12">
+          <a href="{% url 'edit_piece' piece.id %}">
+            <p>Click here to edit this piece!</p>
+          </a>
+        </div>
+      </div> 
+    {% endif %} 
     {% if request.user.is_authenticated %}
-    <p>Feel free to leave a comment!</p>
-    <form action="{% url 'post' piece.id %}" method='post'>
-      {% csrf_token %}
-      {{ post_form.as_p }}
-      <input type='submit' value='Submit'/>
-    </form>
+      <div class="row">
+        <div class="col-md-12">
+          <p>Feel free to leave a comment!</p>
+          <form action="{% url 'post' piece.id %}" method='post'>
+            {% csrf_token %}
+            {{ post_form.as_p }}
+            <input type='submit' value='Submit'/>
+          </form>
+        </div>
+      </div> 
     {% endif %}
     {% for post in posts %}
-    <a href="{% url 'profile' post.user.username %}">
-      <p>{{ post.user.username }}</p>
-      <img src="{{ post.user.profile.image.url }}">
-    </a>
-      <p>{{ post.body }}</p>
+      <div class="row">
+        <div class="col-md-12">
+          <table>
+            <tr>
+              <td>
+                <a href="{% url 'profile' post.user.username %}">
+                  <p>{{ post.user.username }}</p>
+                  <img src="{{ post.user.profile.image.url }}">
+                </a>
+              </td> 
+              <td> 
+                <p>{{ post.body }}</p>
+              </td>
+            </tr> 
+          </table>
+        </div> 
+      </div> 
     {% endfor %}
   </main> 
 {% endblock %}

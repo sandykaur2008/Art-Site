@@ -3,34 +3,50 @@
 
 {% block content %}
   <main>
-    <table>
-      <tr>
-        <td><img src="{{ user.profile.image.url }}"></td>
-        <td>
-          <h1>{{ user.username }}</h1>
-          {% if user.profile.bio %}<p>{{ user.profile.bio }}</p>{% endif %}
-          <p>Email: {{ user.email }}</p>
-        </td>
-      </tr>
-    </table>
+    <div class="row">
+      <div class="col-md-12">
+        <table>
+          <tr>
+            <td><img src="{{ user.profile.image.url }}"></td>
+            <td>
+              <h1>{{ user.username }}</h1>
+              {% if user.profile.bio %}<p>{{ user.profile.bio }}</p>{% endif %}
+              <p>Email: {{ user.email }}</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div> 
     {% if request.user.is_authenticated and user == request.user %}
-    <a href="{% url 'edit_profile' %}">Edit Profile</a>
+      <div class="row">
+        <div class="col-md-12">
+          <a href="{% url 'edit_profile' %}">Edit Profile</a>
+        </div>
+      </div> 
     {% endif %}
     {% for piece in pieces %}
-    <article>
-      <a href="{% url 'detail' piece.id %}">
-        <img src="{{ piece.image.url }}">
-        <h3>{{ piece.name }}</h3>
-      </a> 
-    </article> 
+      <div class="row">
+        <div class="col-md-12">
+          <article>
+            <a href="{% url 'detail' piece.id %}">
+              <img src="{{ piece.image.url }}">
+              <h3>{{ piece.name }}</h3>
+            </a> 
+          </article> 
+        </div>
+      </div> 
     {% endfor %}
     {% if request.user.is_authenticated and user == request.user %}
-    <p>Want to add a piece? Do so below! To edit/delete a piece, click on the specific piece above.</p>
-    <form enctype='multipart/form-data' action="{% url 'post_piece' %}" method='post'>
-      {% csrf_token %}
-      {{ form.as_p }}
-      <input type='submit' value='Submit'/>
-    </form>
+      <div class="row">
+        <div class="col-md-12">
+          <p>Want to add a piece? Do so below! To edit/delete a piece, click on the specific piece above.</p>
+          <form enctype='multipart/form-data' action="{% url 'post_piece' %}" method='post'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type='submit' value='Submit'/>
+          </form>
+        </div>
+      </div> 
     {% endif %}
   </main> 
 {% endblock %}
