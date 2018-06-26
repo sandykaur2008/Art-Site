@@ -8,6 +8,11 @@
         <article>
           <img src="{{ piece.image.url }}"> 
           <h3>{{ piece.name }}</h3> 
+          <button id="likes" data-id="{{ piece.id }}"
+                  class="btn btn-mini btn-danger glyphicon glyphicon-heart"
+                  type="button">
+            {% if piece.likes > 0 %} {{ piece.likes }} {% endif %}
+          </button> 
         </article>
       </div>
     </div>  

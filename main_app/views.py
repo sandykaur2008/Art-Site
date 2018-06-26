@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import Piece, Profile, Post
@@ -158,3 +158,15 @@ def edit_piece(request, piece_id):
   else:
     form = EditPieceForm(instance=piece)
   return render(request, 'edit_piece.html', {'form': form, 'piece': piece})
+
+def like_piece(request):
+  piece_id = request.GET.get('piece_id', None)
+
+  likes = 0
+  if (piece_id):
+    piece = Piece.objects.get(id=int(piece_id))
+    if piece is not None:
+      likes = piece.likes + 1
+      piece.likes = likes
+      piece.save()
+  return HttpResponse(likes)
