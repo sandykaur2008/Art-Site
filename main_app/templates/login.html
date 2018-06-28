@@ -8,15 +8,20 @@
         <h1>Sign In</h1>
       </div>
     </div>
+    <br></br> 
     <div class="row">
       <div class="col-md-12"> 
         <form method='post' action'.'>
           {% csrf_token %}
-          {{ form.as_p }}
+          <p>{{ form.username }}
+          <p>{{ form.username.label }}</p>
+          <p>{{ form.password }}</p>
+          <p>{{ form.password.label }}</p>
           <input type='submit' value='Submit'/>
         </form>
       </div>
     </div> 
+    <br></br> 
     <div class="row">
       <div class="col-md-12">
         <p>Forgot Your Password?</p>

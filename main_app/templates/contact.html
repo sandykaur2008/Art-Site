@@ -15,11 +15,17 @@
           please visit their profile page to contact them directly.</p>
       </div>
     </div> 
+    <br></br>
     <div class="row">
       <div class="col-md-12">
         <form method='post' action'.'>
           {% csrf_token %}
-          {{ form.as_p }}
+          <p>{{ form.text }}</p>
+          <p>{{ form.text.label }}</p>
+          <p>{{ form.email }}</p>
+          <p>{{ form.email.label }}</p>
+          <p>{{ form.name }}</p>
+          <p>{{ form.name.label }}</p>
           <input type='submit' value='Submit'/>
         </form>
       </div>
