@@ -3,15 +3,28 @@
 
 {% block content %}
 <main>
-  <h1>Edit Piece</h1>
-  <article>
-    <img src="{{ piece.image.url }}"> 
-    <h3>{{ piece.name }}</h3> 
-  </article> 
-  <form enctype='multipart/form-data' method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save changes</button>
-  </form>
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Edit {{ piece.name }}</h1>
+    </div> 
+  </div>
+  <div class="row">
+    <div class="col-md-12"> 
+        <img src="{{ piece.image.url }}" alt="image of art piece"> 
+        {% csrf_token %}
+        <p class="padding">{{ form.image }}</p>
+    </div>
+  </div> 
+  <div class="row">
+    <div class="col-md-12">
+      <form enctype='multipart/form-data' method="post">
+        {% csrf_token %}
+        <p>{{ form.name }}</p>
+        <p>{{ form.name.label }}</p>
+        <p>{{ form.delete_piece }} Delete Piece?</p>
+        <input type="submit" value="Save changes">
+      </form>
+    </div>
+  </div> 
 </main>
 {% endblock %}

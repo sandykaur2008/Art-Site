@@ -11,6 +11,7 @@ class Piece(models.Model):
   image = models.ImageField(upload_to='piece_images',
                             default='default.png')
   delete_piece = models.BooleanField(default=False)
+  likes = models.IntegerField(default=0)
 
   def __str__(self):
     return self.name
@@ -24,6 +25,7 @@ class Post(models.Model):
   def __str__(self):
     return self.body 
 
+#extends User 
 class Profile(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE)
   bio = models.TextField(max_length=500, blank=True)
@@ -35,6 +37,7 @@ def create_user_profile(sender, instance, created, **kwargs):
   if created:
     Profile.objects.create(user=instance)
 
+#doesn't seem necessary: 
 # @receiver(post_save, sender=User)
 # def save_user_profile(sender, instance, **kwargs):
 #   instance.profile.save()

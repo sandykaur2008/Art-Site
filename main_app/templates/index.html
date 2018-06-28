@@ -3,13 +3,21 @@
 
 {% block content %} 
   <main> 
+    <h1 class="index"> Welcome to ArtSite!</h1>
+    <div class="row">
     {% for user in users %}
-    <article>
-      <a href="{% url 'profile' user.username %}">
-        <img src="{{ user.profile.image.url }}">
-        <h3>Art by {{ user.username }}</h3>
-      </a> 
-    </article> 
+      <div class="col-md-4">
+        <article class="index">
+          <a href="{% url 'profile' user.username %}">
+            <img src="{{ user.profile.image.url }}" alt="user profile image">
+            <p>Art by {{ user.username }}</p>
+          </a> 
+        </article> 
+      </div>
+    {% if forloop.counter|divisibleby:3 %}
+      </div><div class="row">
+    {% endif %}
     {% endfor %}
+    </div> 
   </main>   
 {% endblock %}

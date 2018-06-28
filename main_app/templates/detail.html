@@ -3,29 +3,62 @@
 
 {% block content %}
   <main>
-    <article>
-      <img src="{{ piece.image.url }}"> 
-      <h3>{{ piece.name }}</h3> 
-    </article> 
-    {% if request.user.is_authenticated and piece.user == request.user  %}
-    <a href="{% url 'edit_piece' piece.id %}">
-      <p>Click here to edit this piece!</p>
-    </a>
-    {% endif %}
+    <section class="center">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>{{ piece.name }}</h1>
+          {% if request.user.is_authenticated and piece.user == request.user  %}
+            <a href="{% url 'edit_piece' piece.id %}">
+              Click here to edit this piece!
+            </a>
+          {% endif %} 
+        </div>
+      </div>
+    </section> 
+    <div class="row">
+      <div class="col-md-12">
+        <article class="detail">
+          <img src="{{ piece.image.url }}" alt="image of art piece"> 
+        </article>
+        <button id="likes" data-id="{{ piece.id }}"
+        class="btn btn-mini btn-danger glyphicon glyphicon-heart"
+        type="button">
+          {% if piece.likes > 0 %} {{ piece.likes }} {% endif %}
+        </button> 
+      </div>
+    </div>  
     {% if request.user.is_authenticated %}
-    <p>Feel free to leave a comment!</p>
-    <form action="{% url 'post' piece.id %}" method='post'>
-      {% csrf_token %}
-      {{ post_form.as_p }}
-      <input type='submit' value='Submit'/>
-    </form>
+      <div class="row">
+        <div class="col-md-12">
+          <br></br>
+          <p>Feel free to leave a comment!</p>
+          <form action="{% url 'post' piece.id %}" method='post'>
+            {% csrf_token %}
+            <p>{{ post_form.body }}</p>
+            <p>{{ post_form.body.label }}</p> 
+            <input type='submit' value='Submit'/>
+          </form>
+        </div>
+      </div> 
     {% endif %}
     {% for post in posts %}
-    <a href="{% url 'profile' post.user.username %}">
-      <p>{{ post.user.username }}</p>
-      <img src="{{ post.user.profile.image.url }}">
-    </a>
-      <p>{{ post.body }}</p>
+    <br></br> 
+      <div class="row">
+        <div class="col-md-12">
+          <table class="post">
+            <tr>
+              <td>
+                <a href="{% url 'profile' post.user.username %}">
+                  <img src="{{ post.user.profile.image.url }}" alt="user profile image">
+                </a>
+              </td> 
+              <td> 
+                <p>{{ post.user.username }} says: {{ post.body }}</p>
+              </td>
+            </tr> 
+          </table>
+        </div> 
+      </div> 
     {% endfor %}
   </main> 
 {% endblock %}

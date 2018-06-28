@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import Piece, Profile, Post
@@ -31,7 +31,7 @@ def login_view(request):
         return HttpResponseRedirect(reverse('login'))
   else:
     form = LoginForm()
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'login.html', {'form': form, 'title': 'Login'})
 
 def logout_view(request):
   logout(request)
@@ -49,15 +49,15 @@ def register(request):
       return HttpResponseRedirect(reverse('index'))
   else:
     form = RegisterForm()
-  return render(request, 'register.html', {'form': form})
+  return render(request, 'register.html', {'form': form, 'title': 'Register'})
 
 def index(request):
   users = User.objects.all()
   profiles = Profile.objects.all()
-  return render(request, 'index.html', {'users': users, 'profiles': profiles})
+  return render(request, 'index.html', {'users': users, 'profiles': profiles, 'title': 'Home'})
 
 def about(request):
-  return render(request, 'about.html')
+  return render(request, 'about.html', {'title': 'About'})
 
 def contact(request):
   if request.method == 'POST':
@@ -72,7 +72,7 @@ def contact(request):
       return HttpResponseRedirect(reverse('index'))
   else:
     form = ContactForm()
-  return render(request, 'contact.html', {'form': form})
+  return render(request, 'contact.html', {'form': form, 'title': 'Contact'})
 
 def profile(request, username):
   user = User.objects.get(username=username)
@@ -82,7 +82,7 @@ def profile(request, username):
   return render(request, 'profile.html',
                 {'user': user,
                 'pieces': pieces,
-                'profile': profile, 'form': form})
+                'profile': profile, 'form': form, 'title': user.username})
 
 @login_required
 @transaction.atomic 
@@ -105,7 +105,8 @@ def edit_profile(request):
   return render(request, 'edit_profile.html', {
     'user_form': user_form,
     'profile_form': profile_form,
-    'user': user, 'profile': profile
+    'user': user, 'profile': profile,
+    'title': 'Edit Profile'
   })
 
 @login_required
@@ -122,7 +123,7 @@ def detail(request, piece_id):
   piece = Piece.objects.get(pk=piece_id)
   posts = Post.objects.filter(piece_id=piece_id)
   post_form = PostForm()
-  return render(request, 'detail.html', {'piece': piece, 'posts': posts, 'post_form': post_form})
+  return render(request, 'detail.html', {'piece': piece, 'posts': posts, 'post_form': post_form, 'title': piece.name})
 
 @login_required
 def post(request, piece_id):
@@ -157,4 +158,16 @@ def edit_piece(request, piece_id):
       messages.error(request, 'Please make sure you entered changes correctly')
   else:
     form = EditPieceForm(instance=piece)
-  return render(request, 'edit_piece.html', {'form': form, 'piece': piece})
+  return render(request, 'edit_piece.html', {'form': form, 'piece': piece, 'title': ('Edit ' + piece.name)})
+
+def like_piece(request):
+  piece_id = request.GET.get('piece_id', None)
+
+  likes = 0
+  if (piece_id):
+    piece = Piece.objects.get(id=int(piece_id))
+    if piece is not None:
+      likes = piece.likes + 1
+      piece.likes = likes
+      piece.save()
+  return HttpResponse(likes)
