@@ -18,7 +18,7 @@
     <div class="row">
       <div class="col-md-12">
         <article class="detail">
-          <img src="{{ piece.image.url }}"> 
+          <img src="{{ piece.image.url }}" alt="image of art piece"> 
         </article>
         <button id="likes" data-id="{{ piece.id }}"
         class="btn btn-mini btn-danger glyphicon glyphicon-heart"
@@ -49,7 +49,7 @@
             <tr>
               <td>
                 <a href="{% url 'profile' post.user.username %}">
-                  <img src="{{ post.user.profile.image.url }}">
+                  <img src="{{ post.user.profile.image.url }}" alt="user profile image">
                 </a>
               </td> 
               <td> 

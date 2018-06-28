@@ -7,4 +7,7 @@ db.sqlite3
 main_app/migrations/__pycache__
 .env
 node_modules/
-media/
+media/dest
+media/source
+main_app/static/css/main.*
+.sass-cache

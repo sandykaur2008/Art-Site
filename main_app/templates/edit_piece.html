@@ -10,7 +10,7 @@
   </div>
   <div class="row">
     <div class="col-md-12"> 
-        <img src="{{ piece.image.url }}"> 
+        <img src="{{ piece.image.url }}" alt="image of art piece"> 
         {% csrf_token %}
         <p class="padding">{{ form.image }}</p>
     </div>
