@@ -15,9 +15,9 @@ urlpatterns = [
     path('post_piece/', views.post_piece, name='post_piece'),
     re_path(r'^([0-9]+)/$', views.detail, name = 'detail'),
     re_path(r'^post/([0-9]+)/$', views.post, name='post'),
-    re_path(r'^edit_piece/([0-9]+)/$', views.edit_piece, name='edit_piece')
+    re_path(r'^edit_piece/([0-9]+)/$', views.edit_piece, name='edit_piece'),
+    path('like_piece/', views.like_piece, name = "like_piece")
 ]
-
 
 if settings.DEBUG:
   urlpatterns += [

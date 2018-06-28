@@ -3,11 +3,30 @@
 
 {% block content %}
   <main>
-    <h1>Register</h1>
-    <form method='post' action'.'>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type='submit' value='Submit'/>
-      </form>
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Register</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <form method='post' action'.'>
+          {% csrf_token %}
+          <p>{{ form.username }}</p>
+          <p>{{ form.username.label }}</p>
+          <p>{{ form.first_name }}</p>
+          <p>{{ form.first_name.label }}</p>
+          <p>{{ form.last_name }}</p>
+          <p>{{ form.last_name.label }}</p>
+          <p>{{ form.email }}</p>
+          <p>{{ form.email.label }}</p>
+          <p>{{ form.password1 }} - Must be at least 8 characters and cannot be entirely numeric.</p>
+          <p>{{ form.password1.label }}</p>
+          <p>{{ form.password2 }}</p>
+          <p>{{ form.password2.label }}</p>
+          <input type='submit' value='Submit'/>
+        </form>
+      </div>
+    </div> 
   </main> 
 {% endblock %}

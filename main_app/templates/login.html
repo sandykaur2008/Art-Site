@@ -3,14 +3,30 @@
 
 {% block content %}
   <main>
-    <h1>Sign In</h1>
-    <form method='post' action'.'>
-      {% csrf_token %}
-      {{ form.as_p }}
-      <input type='submit' value='Submit'/>
-    </form>
-    <p>Forgot Your Password?</p>
-    <a href="{% url 'password_reset' %}">Click to Reset Password</a>
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Sign In</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12"> 
+        <form method='post' action'.'>
+          {% csrf_token %}
+          <p>{{ form.username }}
+          <p>{{ form.username.label }}</p>
+          <p>{{ form.password }}</p>
+          <p>{{ form.password.label }}</p>
+          <input type='submit' value='Submit'/>
+        </form>
+      </div>
+    </div> 
+    <br></br> 
+    <div class="row">
+      <div class="col-md-12">
+        <p>Forgot Your Password?</p>
+        <a href="{% url 'password_reset' %}">Click to Reset Password</a>
+      </div>
+    </div> 
   </main> 
 {% endblock %}
 

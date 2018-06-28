@@ -3,13 +3,33 @@
 
 {% block content %}
   <main>
-    <h1>Edit Profile</h1>
-    <img src="{{ profile.image.url }}">
-    <form enctype='multipart/form-data' method="post">
-      {% csrf_token %}
-      {{ profile_form.as_p }}
-      {{ user_form.as_p }}
-      <button type="submit">Save changes</button>
-    </form>
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Edit Profile</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12"> 
+        <img src="{{ profile.image.url }}" alt="user profile image">
+        {% csrf_token %}
+        <p class="padding">{{ profile_form.image }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <form enctype='multipart/form-data' method="post">
+          {% csrf_token %}
+          <p>{{ profile_form.bio }}</p>
+          <p>{{ profile_form.bio.label }}</p>
+          <p>{{ user_form.first_name }}</p>
+          <p>{{ user_form.first_name.label }}</p>
+          <p>{{ user_form.last_name }}</p>
+          <p>{{ user_form.last_name.label }}</p>
+          <p>{{ user_form.email }}</p>
+          <p>{{ user_form.email.label }}</p> 
+          <input type="submit" value="Save changes">
+        </form>
+      </div>
+    </div> 
   </main>
 {% endblock %}

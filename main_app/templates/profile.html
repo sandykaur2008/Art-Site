@@ -3,34 +3,47 @@
 
 {% block content %}
   <main>
-    <table>
-      <tr>
-        <td><img src="{{ user.profile.image.url }}"></td>
-        <td>
+    <section class="center">
+      <div class="row">
+        <div class="col-md-12">
           <h1>{{ user.username }}</h1>
-          {% if user.profile.bio %}<p>{{ user.profile.bio }}</p>{% endif %}
+          <p>{{ user.profile.bio }}</p>
           <p>Email: {{ user.email }}</p>
-        </td>
-      </tr>
-    </table>
-    {% if request.user.is_authenticated and user == request.user %}
-    <a href="{% url 'edit_profile' %}">Edit Profile</a>
-    {% endif %}
+          {% if request.user.is_authenticated and user == request.user %}
+            <a href="{% url 'edit_profile' %}">Edit Profile</a>
+          {% endif %}
+        </div>
+      </div>
+    </section> 
+    <div class="row">
     {% for piece in pieces %}
-    <article>
-      <a href="{% url 'detail' piece.id %}">
-        <img src="{{ piece.image.url }}">
-        <h3>{{ piece.name }}</h3>
-      </a> 
-    </article> 
+      <div class="col-md-4">
+        <article>
+          <a href="{% url 'detail' piece.id %}">
+            <img src="{{ piece.image.url }}" alt="image of art piece">
+            <p>{{ piece.name }}</p>
+          </a>  
+        </article> 
+      </div>
+      {% if forloop.counter|divisibleby:3 %}
+        </div><div class="row">
+      {% endif %}
     {% endfor %}
     {% if request.user.is_authenticated and user == request.user %}
-    <p>Want to add a piece? Do so below! To edit/delete a piece, click on the specific piece above.</p>
-    <form enctype='multipart/form-data' action="{% url 'post_piece' %}" method='post'>
-      {% csrf_token %}
-      {{ form.as_p }}
-      <input type='submit' value='Submit'/>
-    </form>
+      <div class="row">
+        <div class="col-md-12">
+          <br></br> 
+          <p>Want to add a piece? Do so below! To edit/delete a piece, click on the specific piece above.</p>
+          <form enctype='multipart/form-data' action="{% url 'post_piece' %}" method='post'>
+            {% csrf_token %}
+            <p>{{ form.name }}</p>
+            <p>{{ form.name.label }}</p>
+            <p>{{ form.image }}</p>
+            <p>{{ form.image.label }}</p> 
+            <input type='submit' value='Submit'/>
+          </form>
+        </div>
+      </div> 
     {% endif %}
   </main> 
 {% endblock %}
