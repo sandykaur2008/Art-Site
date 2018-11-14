@@ -13,13 +13,7 @@ To simply view:
 # Prerequisites
 Aside from a working browser, you will also need:
 
-- Sass: https://sass-lang.com/install 
 - the dependencies in requirements.txt 
-
-## To build css from scss files
-To run Sass from the command line, make sure you're in root directory of repo and execute:
-
-```sass main_app/static/scss/main.scss main_app/static/css/main.css```
 
 ## To install dependencies in requirements.txt
 Make sure you're in root directory of repo and execute:
