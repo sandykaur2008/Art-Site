@@ -12,8 +12,14 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import environ 
-if os.path.isfile('./.env'): 
-  environ.Env.read_env('.env')
+env = environ.Env(
+  DEBUG=(bool, False)
+)
+environ.Env.read_env()
+DEBUG = env('DEBUG')
+SECRET_KEY = env('SECRET_KEY')
+SENDGRID_API_KEY = env('SENDGRID_API_KEY')
+
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
