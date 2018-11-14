@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import environ 
+import django_heroku
 env = environ.Env(
   DEBUG=(bool, False)
 )
@@ -127,3 +128,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
