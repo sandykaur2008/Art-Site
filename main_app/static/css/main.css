@@ -1,0 +1,85 @@
+/*headings*/
+h1 {
+  text-align: center;
+  padding-bottom: 1em; }
+
+/*header*/
+header .container {
+  padding-top: 1em; }
+header a {
+  padding-right: 1em; }
+
+.navbar-fixed-top {
+  position: relative; }
+
+.navbar {
+  margin-bottom: 0; }
+
+.topnav {
+  overflow: hidden; }
+  @media screen and (max-width: 400px) {
+    .topnav a:not(:first-child) {
+      display: none; } }
+  @media screen and (max-width: 400px) {
+    .topnav a.icon {
+      float: right;
+      display: block; } }
+  .topnav .icon {
+    display: none; }
+    @media screen and (max-width: 400px) {
+      .topnav .icon {
+        float: right;
+        display: block; } }
+  @media screen and (max-width: 400px) {
+    .topnav.responsive {
+      position: relative; } }
+  @media screen and (max-width: 400px) {
+    .topnav.responsive a {
+      float: none;
+      display: block;
+      text-align: center; } }
+  @media screen and (max-width: 400px) {
+    .topnav.responsive a.icon {
+      position: absolute;
+      right: 0;
+      top: 0; } }
+
+/*content*/
+main {
+  padding-bottom: 5em; }
+
+img {
+  max-width: 100%;
+  width: 300px; }
+
+article {
+  max-width: 50em; }
+  article p {
+    padding-top: 1em;
+    padding-bottom: 1em; }
+  article a {
+    display: inline-block; }
+
+@media screen and (max-width: 991px) {
+  div.col-md-4 {
+    text-align: center; } }
+
+section.center {
+  text-align: center;
+  padding-bottom: 2em; }
+  section.center h1 {
+    padding-bottom: 0; }
+
+p.padding {
+  padding-top: 1em;
+  padding-bottom: 1em; }
+
+article.detail img {
+  width: 500px; }
+
+table.post img {
+  width: 100px; }
+table.post td {
+  padding: 0 1em; }
+
+/*# sourceMappingURL=main.css.map */
