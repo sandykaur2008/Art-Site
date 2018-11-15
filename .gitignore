@@ -15,3 +15,4 @@ main_app/static/scss/
 gruntfile.js
 package-lock.json
 package.json
+staticfiles/
