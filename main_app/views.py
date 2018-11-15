@@ -76,8 +76,8 @@ def contact(request):
 
 def profile(request, username):
   user = User.objects.get(username=username)
-  pieces = Piece.objects.filter(user_id=user.id)
-  profile = Profile.objects.get(user_id=user.id)
+  pieces = Piece.objects.filter(user=user)
+  profile = Profile.objects.get(user=user)
   form = PieceForm()
   return render(request, 'profile.html',
                 {'user': user,
