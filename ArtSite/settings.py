@@ -87,11 +87,13 @@ DATABASES = {
         'NAME': os.environ.get('DB_NAME'), 
         'USER': os.environ.get('DB_USER', ''),
         'PASSWORD': os.environ.get('DB_PASS', ''),
-        'HOST': '',
+        'HOST': 'localhost',
         'PORT': '5432', 
     }
 }
 
+db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -135,5 +137,3 @@ MEDIA_URL = '/media/'
 STATICFILES_STORAGE = 'ArtSite.storage.WhiteNoiseStaticFilesStorage'
 # Activate Django-Heroku.
 django_heroku.settings(locals())
-db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
-DATABASES['default'].update(db_from_env)
