@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 from dotenv import load_dotenv
 import django_heroku
+import dj_database_url
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.join(basedir, '.env'))
@@ -130,5 +131,5 @@ MEDIA_URL = '/media/'
 STATICFILES_STORAGE = 'ArtSite.storage.WhiteNoiseStaticFilesStorage'
 # Activate Django-Heroku.
 django_heroku.settings(locals())
-import dj_database_url
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES['default'].update(db_from_env)
