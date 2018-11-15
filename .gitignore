@@ -16,3 +16,4 @@ gruntfile.js
 package-lock.json
 package.json
 staticfiles/
+main_app/migrations
