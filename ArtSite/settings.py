@@ -19,6 +19,7 @@ load_dotenv(os.path.join(basedir, '.env'))
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
+DATABASE_URL = os.environ.get('DATABASE_URL')
 
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
