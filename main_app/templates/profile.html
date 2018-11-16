@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-md-12">
           <h1>{{ user.username }}</h1>
-          <!--<p>{{ user.profile.bio }}</p>-->
+          <p>{{ user.profile.bio }}</p>
           <p>Email: {{ user.email }}</p>
           {% if request.user.is_authenticated and user == request.user %}
             <a href="{% url 'edit_profile' %}">Edit Profile</a>
@@ -15,7 +15,7 @@
         </div>
       </div>
     </section> 
-    <!--<div class="row">
+    <div class="row">
     {% for piece in pieces %}
       <div class="col-md-4">
         <article>
@@ -44,6 +44,6 @@
           </form>
         </div>
       </div> 
-    {% endif %}-->
+    {% endif %}
   </main> 
 {% endblock %}
