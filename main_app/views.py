@@ -76,13 +76,14 @@ def contact(request):
 
 def profile(request, username):
   user = User.objects.get(username=username)
-  pieces = Piece.objects.filter(user=user)
-  profile = Profile.objects.get(user=user)
-  form = PieceForm()
+  #pieces = Piece.objects.filter(user=user)
+  #profile = Profile.objects.get(user=user)
+  #form = PieceForm()
   return render(request, 'profile.html',
                 {'user': user,
-                'pieces': pieces,
-                'profile': profile, 'form': form, 'title': user.username})
+                #'pieces': pieces,
+                #'profile': profile, 'form': form, 'title': user.username
+                })
 
 @login_required
 @transaction.atomic 
