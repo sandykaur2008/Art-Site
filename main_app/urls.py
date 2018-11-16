@@ -19,10 +19,10 @@ urlpatterns = [
     path('like_piece/', views.like_piece, name = "like_piece")
 ]
 
-if settings.DEBUG:
-  urlpatterns += [
-    re_path(r'^media/(?P<path>.*)$', serve,
-    {'document_root': settings.MEDIA_ROOT,}),]
+#if settings.DEBUG:
+urlpatterns += [
+  re_path(r'^media/(?P<path>.*)$', serve,
+  {'document_root': settings.MEDIA_ROOT,}),]
     
 
 
