@@ -84,11 +84,12 @@ WSGI_APPLICATION = 'ArtSite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', ''), 
-        'USER': os.environ.get('DB_USER', ''),
-        'PASSWORD': os.environ.get('DB_PASS', ''),
-        'HOST': '',
-        'PORT': '5432', 
+        'DATABASE_URL': os.environ.get('DATABASE_URL'),
+        #'NAME': os.environ.get('DB_NAME', ''), 
+        #'USER': os.environ.get('DB_USER', ''),
+        #'PASSWORD': os.environ.get('DB_PASS', ''),
+        #'HOST': '',
+        #'PORT': '5432', 
     }
 }
 
