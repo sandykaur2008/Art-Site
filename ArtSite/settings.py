@@ -12,8 +12,12 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 from dotenv import load_dotenv
-import django_heroku
+#import django_heroku
 import dj_database_url
+import boto3
+import logging
+
+boto3.set_stream_logger('boto3.resources', logging.DEBUG)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.join(basedir, '.env'))
@@ -45,6 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -129,16 +135,24 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+  'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'static'
 
-STATICFILE_DIRS = (
-  os.path.join(BASE_DIR, 'main_app/static'), 
-)
-STATICFILES_STORAGE = 'ArtSite.storage.WhiteNoiseStaticFilesStorage'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'main_app/static'),
+]
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage' 
 # Activate Django-Heroku.
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
 db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
 DATABASES['default'].update(db_from_env)
+
+print('AWS_ACCESS_KEY_ID: ' + AWS_ACCESS_KEY_ID)
+print('AWS_SECRET_ACCESS_KEY: ' + AWS_SECRET_ACCESS_KEY)
