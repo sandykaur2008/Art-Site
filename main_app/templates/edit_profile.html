@@ -10,15 +10,14 @@
     </div>
     <div class="row">
       <div class="col-md-12"> 
-        <img src="{{ profile.image.url }}" alt="user profile image">
-        {% csrf_token %}
-        <p class="padding">{{ profile_form.image }}</p>
+        <img src="{{ profile.image.url }}" alt="user profile image">        
       </div>
     </div>
     <div class="row">
       <div class="col-md-12">
         <form enctype='multipart/form-data' method="post">
           {% csrf_token %}
+          <p class="padding">{{ profile_form.image }}</p>
           <p>{{ profile_form.bio }}</p>
           <p>{{ profile_form.bio.label }}</p>
           <p>{{ user_form.first_name }}</p>
