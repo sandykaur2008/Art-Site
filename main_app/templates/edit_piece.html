@@ -11,14 +11,13 @@
   <div class="row">
     <div class="col-md-12"> 
         <img src="{{ piece.image.url }}" alt="image of art piece"> 
-        {% csrf_token %}
-        <p class="padding">{{ form.image }}</p>
     </div>
   </div> 
   <div class="row">
     <div class="col-md-12">
       <form enctype='multipart/form-data' method="post">
         {% csrf_token %}
+        <p class="padding">{{ form.image }}</p>
         <p>{{ form.name }}</p>
         <p>{{ form.name.label }}</p>
         <p>{{ form.delete_piece }} Delete Piece?</p>
