@@ -14,10 +14,9 @@ import os
 from dotenv import load_dotenv
 #import django_heroku
 import dj_database_url
-import boto3
-import logging
-
-boto3.set_stream_logger('boto3.resources', logging.DEBUG)
+#import boto3
+#import logging
+#boto3.set_stream_logger('boto3.resources', logging.DEBUG)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.join(basedir, '.env'))
@@ -143,12 +142,14 @@ AWS_S3_OBJECT_PARAMETERS = {
   'CacheControl': 'max-age=86400',
 }
 AWS_LOCATION = 'static'
-
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'main_app/static'),
 ]
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#MEDIA_URL = 'https://artsite-media.s3.amazonaws.com/media/' 
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage' 
+DEFAULT_FILE_STORAGE = 'ArtSite.storages_backends.MediaStorage' 
 # Activate Django-Heroku.
 #django_heroku.settings(locals())
 db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
