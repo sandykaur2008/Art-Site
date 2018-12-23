@@ -1,5 +1,5 @@
 # Project Title
-This project is called "Art Site" and it's a simple social media site where artists can post pieces and comment on the pieces of others.  
+This project is called "Art Site" and it's a simple social media site where artists can post pieces and comment on the pieces of others.  It was built using Django (backend) and Grunt (for image re-sizing), Bootstrap, and Sass. It is deployed with Heroku at https://sandys-artsite.herokuapp.com/. 
 
 # Getting Started
 To contribute:
