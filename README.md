@@ -24,7 +24,7 @@ Make sure you're in root directory of repo and execute:
 - Navigate to root directory
 - Execute: 
 
-```python manage.py runserver```
+```gunicorn ArtSite.wsgi```
 
 - Navigate to link provided 
 
