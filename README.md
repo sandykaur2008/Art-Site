@@ -44,3 +44,6 @@ All images are mine.
 Thanks, @github/markalexandercastillo, for reviewing and giving me tips! 
 :relaxed: 
 Also relied on https://simpleisbetterthancomplex.com/ 
+
+# To Do
+Need to fix tests and also Amazon S3 storage settings. 
