@@ -46,4 +46,5 @@ Thanks, @github/markalexandercastillo, for reviewing and giving me tips!
 Also, found https://simpleisbetterthancomplex.com/ very helpful! 
 
 # To Do
-Need to fix tests and also Amazon S3 storage settings. 
+Need to fix tests and also Amazon S3 storage settings. Also, need to make
+posts on site look nicer. 
