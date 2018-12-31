@@ -9,7 +9,6 @@ main_app/migrations/__pycache__
 node_modules/
 media/dest
 media/source
-main_app/static/scss/
 .sass-cache
 .vscode
 gruntfile.js
