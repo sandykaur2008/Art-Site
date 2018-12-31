@@ -20,7 +20,7 @@ class ContactForm(forms.Form):
   email = forms.EmailField(label='Email', max_length=50)
   name = forms.CharField(label='Name', max_length=20)
 
-#will combine the next two forms in appropriate templates 
+#will combine the next two forms in appropriate templates (profile editing)
 class UserForm(forms.ModelForm):
   class Meta:
     model = User
