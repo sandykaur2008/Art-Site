@@ -20,29 +20,22 @@
         <article class="detail">
           <img src="{{ piece.image.url }}" alt="image of art piece"> 
         </article>
-        <button id="likes" data-id="{{ piece.id }}"
-        class="btn btn-mini btn-danger glyphicon glyphicon-heart"
-        type="button">
-          {% if piece.likes > 0 %} {{ piece.likes }} {% endif %}
-        </button> 
       </div>
     </div>  
-    {% if request.user.is_authenticated %}
-      <div class="row">
-        <div class="col-md-12">
-          <br></br>
-          <p>Feel free to leave a comment!</p>
-          <form action="{% url 'post' piece.id %}" method='post'>
-            {% csrf_token %}
-            <p>{{ post_form.body }}</p>
-            <p>{{ post_form.body.label }}</p> 
-            <input type='submit' value='Submit'/>
-          </form>
-        </div>
-      </div> 
-    {% endif %}
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <table>
+          <tr>
+            <td>
+              <button id="likes" data-id="{{ piece.id }}"
+              class="btn btn-mini btn-danger glyphicon glyphicon-heart"
+              type="button">{% if piece.likes > 0 %} {{ piece.likes }} {% endif %}</button>
+            </td>
+          </tr>
+        </table> 
     {% for post in posts %}
-    <br></br> 
+      <hr> 
       <div class="row">
         <div class="col-md-12">
           <table class="post">
@@ -53,12 +46,25 @@
                 </a>
               </td> 
               <td> 
-                <p>{{ post.user.username }} says: {{ post.body }}</p>
+                <p><strong><a href="{% url 'profile' post.user.username %}" style="{text-sty}">{{ post.user.username }}:</a></strong> {{ post.body }}</p>
               </td>
             </tr> 
           </table>
         </div> 
       </div> 
     {% endfor %}
+    {% if request.user.is_authenticated %}
+    <hr> 
+    <div class="row">
+      <div class="col-md-12">
+        <br>
+        <form action="{% url 'post' piece.id %}" method='post'>
+          {% csrf_token %}
+          <p>{{ post_form.body }}</p>
+          <input type='submit' value='Post'/>
+        </form>
+      </div>
+    </div> 
+  {% endif %}
   </main> 
 {% endblock %}
