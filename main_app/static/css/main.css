@@ -1,7 +1,8 @@
 /*headings*/
 h1 {
   text-align: center;
-  padding-bottom: 1em; }
+  padding-bottom: 1em;
+  font-family: "snell roundhand", "cursive"; }
 
 /*header*/
 header .container {
