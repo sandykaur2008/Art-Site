@@ -6,7 +6,7 @@
     <section class="center">
       <div class="row">
         <div class="col-md-12">
-          <h1>{{ user.username }}</h1>
+          <h1>Art by {{ user.username }}</h1>
           <p>{{ user.profile.bio }}</p>
           <p>Email: {{ user.email }}</p>
           {% if request.user.is_authenticated and user == request.user %}
