@@ -1,5 +1,5 @@
 # Project Title
-This project is called "Art Site" and it's a simple social media site where artists can post pieces and comment on the pieces of others. It was built using Django (backend), GraphicsMagick and Grunt (for image re-sizing), Bootstrap, and Sass. It is deployed with Heroku at https://sandys-artsite.herokuapp.com/.
+This project is called "Art Site" and it's a simple social media site where artists can post pieces and comment on the pieces of others. It was built using Django (backend), GraphicsMagick and Grunt (for image re-sizing), Bootstrap, and Sass. Dockerized and deployed with Amazon Fargate at https://spk.sandys-artsite.com/. Static resources are served via Amazon S3 buckets. Also using Amazon RDS (Postgres). 
 
 # Getting Started
 To contribute:
@@ -44,6 +44,3 @@ All images are mine.
 Thanks, @github/markalexandercastillo, for reviewing and giving me tips! 
 :relaxed: 
 Also, found https://simpleisbetterthancomplex.com/ very helpful! 
-
-# To Do
-Need to fix tests and also Amazon S3 storage settings. Also, would like to work more on styling. 
